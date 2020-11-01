@@ -22,7 +22,7 @@ test('does not throw warning with expected props', () => {
   checkProps(GuessedWords, defaultProps);
 });
 
-describe('if there are no words guessed ', () => {
+describe('if there are no words guessed', () => {
   let wrapper;
 
   beforeEach(() => {
@@ -39,7 +39,7 @@ describe('if there are no words guessed ', () => {
   });
 });
 
-describe('if there are words guessed ', () => {
+describe('if there are words guessed', () => {
   let wrapper;
   const guessedWords = [
     { guessedWord: 'train', letterMatchCount: 3 },
@@ -55,8 +55,8 @@ describe('if there are words guessed ', () => {
   });
 
   test('renders "guessed words" section', () => {
-    const guessedWordsNode = findByTestAttr(wrapper, 'guess-words');
-    expect(guessedWordsNode.text().length).toBe(1);
+    const guessedWordsNode = findByTestAttr(wrapper, 'guessed-words');
+    expect(guessedWordsNode.length).toBe(1);
   });
 
   test('correct number of guessed words', () => {
