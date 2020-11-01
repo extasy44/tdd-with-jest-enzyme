@@ -1,6 +1,4 @@
 import React from 'react';
-import './App.css';
-
 import GuessedWords from './GuessedWords';
 import Congrats from './Congrats';
 
