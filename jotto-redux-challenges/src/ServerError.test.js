@@ -12,6 +12,7 @@ test('renders without error', () => {
   const component = findByTestAttr(wrapper, 'component-server-error');
   expect(component.length).toBe(1);
 });
+
 test('renders non-empty text', () => {
   const wrapper = shallow(<ServerError />);
   const component = findByTestAttr(wrapper, 'component-server-error');
