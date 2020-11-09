@@ -8,17 +8,17 @@ import successContext from './contexts/successContext';
 import guessedWordsContext from './contexts/guessedWordsContext';
 
 /**
-* Create ReactWrapper for Input component for testing
-* @param {object} testValues - Context and props values for this specific test.
-* @returns {ReactWrapper} - Wrapper for Input component and providers
-*/
+ * Create ReactWrapper for Input component for testing
+ * @param {object} testValues - Context and props values for this specific test.
+ * @returns {ReactWrapper} - Wrapper for Input component and providers
+ */
 const setup = ({ language, secretWord, success }) => {
-  language = language || "en";
-  secretWord = secretWord || "party";
+  language = language || 'en';
+  secretWord = secretWord || 'party';
   success = success || false;
 
   return mount(
-    <languageContext.Provider value={language} >
+    <languageContext.Provider value={language}>
       <successContext.SuccessProvider value={[success, jest.fn()]}>
         <guessedWordsContext.GuessedWordsProvider>
           <Input secretWord={secretWord} />
@@ -26,7 +26,7 @@ const setup = ({ language, secretWord, success }) => {
       </successContext.SuccessProvider>
     </languageContext.Provider>
   );
-}
+};
 
 test('Input renders without error', () => {
   const wrapper = setup({});
@@ -35,7 +35,7 @@ test('Input renders without error', () => {
 });
 
 test('does not throw warning with expected props', () => {
-  checkProps(Input, { secretWord: "party" });
+  checkProps(Input, { secretWord: 'party' });
 });
 
 describe('state controlled input field', () => {
@@ -44,14 +44,14 @@ describe('state controlled input field', () => {
 
   beforeEach(() => {
     mockSetCurrentGuess.mockClear();
-    React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
+    React.useState = jest.fn(() => ['', mockSetCurrentGuess]);
     wrapper = setup({});
   });
   test('state updates with value of input box upon change', () => {
     const inputBox = findByTestAttr(wrapper, 'input-box');
 
     const mockEvent = { target: { value: 'train' } };
-    inputBox.simulate("change", mockEvent);
+    inputBox.simulate('change', mockEvent);
 
     expect(mockSetCurrentGuess).toHaveBeenCalledWith('train');
   });
@@ -59,24 +59,24 @@ describe('state controlled input field', () => {
     const submitButton = findByTestAttr(wrapper, 'submit-button');
 
     submitButton.simulate('click', { preventDefault() {} });
-    expect(mockSetCurrentGuess).toHaveBeenCalledWith("");
-  })
+    expect(mockSetCurrentGuess).toHaveBeenCalledWith('');
+  });
 });
 
 describe('languagePicker', () => {
   test('correctly renders submit string in english', () => {
-    const wrapper = setup({ language: "en" });
+    const wrapper = setup({ language: 'en' });
     const submitButton = findByTestAttr(wrapper, 'submit-button');
     expect(submitButton.text()).toBe('Submit');
   });
   test('correctly renders congrats string in emoji', () => {
-    const wrapper = setup({ language: "emoji" });
+    const wrapper = setup({ language: 'emoji' });
     const submitButton = findByTestAttr(wrapper, 'submit-button');
     expect(submitButton.text()).toBe('🚀');
   });
 });
 
 test('input component does not show when success is true', () => {
-  const wrapper = setup({ secretWord: "party", success: true });
+  const wrapper = setup({ secretWord: 'party', success: true });
   expect(wrapper.isEmptyRender()).toBe(true);
 });
