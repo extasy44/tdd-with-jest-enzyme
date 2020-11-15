@@ -1,4 +1,4 @@
-const googleDatabse =  [
+const googleDatabse = [
   'cats.com',
   'souprecipes.com',
   'flowers.com',
